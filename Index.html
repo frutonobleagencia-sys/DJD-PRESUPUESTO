@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presupuesto — Estudio Jurídico Integral Dra. D'Amato</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --burgundy-deep: #1a0008;
+    --burgundy-mid: #3b0017;
+    --rose-gold: #c9878a;
+    --rose-gold-light: #e8b4b8;
+    --rose-gold-pale: #f5dde0;
+    --cream: #fdf5f0;
+    --text-dark: #1a0008;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Archivo', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--text-dark);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 900px; margin: 40px auto; background: #fff; box-shadow: 0 8px 60px rgba(26,0,8,0.18); overflow: hidden; }
+
+  /* ══ HEADER ══ */
+  .header {
+    background: linear-gradient(135deg, var(--burgundy-deep) 0%, var(--burgundy-mid) 60%, #5c1a2e 100%);
+    padding: 36px 52px 32px;
+    position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(201,135,138,0.1) 0%, transparent 65%);
+  }
+  .header-grid { display: flex; align-items: center; gap: 28px; position: relative; z-index: 1; }
+
+  /* Logo container */
+  .logo-wrap { flex-shrink: 200; width: 200px; }
+  .logo-wrap svg { width: 100%; height: auto; display: block; }
+
+  .header-text { flex: 1; }
+  .firm-name {
+    font-family: 'Archivo', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 3px; color: var(--rose-gold); text-transform: uppercase; margin-bottom: 4px;
+  }
+  .doctor-name {
+    font-family: 'Archivo', sans-serif; font-style: italic; font-size: 26px; font-weight: 500;
+    color: var(--rose-gold-light); line-height: 1.15;
+  }
+  .header-divider { width: 56px; height: 1px; background: var(--rose-gold); opacity: 0.45; margin: 10px 0; }
+  .header-sub {
+    font-family: 'Archivo', sans-serif; font-weight: 400; font-size: 11px;
+    letter-spacing: 2.5px; color: rgba(232,180,184,0.75); text-transform: uppercase;
+  }
+  .doc-label { position: relative; z-index: 1; text-align: right; }
+  .doc-label-title {
+    font-family: 'Archivo', sans-serif; font-size: 22px; font-weight: 700;
+    color: var(--rose-gold-light); letter-spacing: 2px;
+  }
+  .doc-label-num { font-size: 13px; color: rgba(232,180,184,0.65); margin-top: 5px; font-weight: 400; letter-spacing: 1px; }
+  .doc-num-input {
+    width: 58px; text-align: right; background: transparent; border: none;
+    border-bottom: 1px solid rgba(201,135,138,0.4); color: rgba(232,180,184,0.6);
+    font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 400; outline: none; margin-top: 8px;
+  }
+
+  .header-border { height: 3px; background: linear-gradient(90deg, transparent, var(--rose-gold) 30%, var(--rose-gold-light) 50%, var(--rose-gold) 70%, transparent); }
+
+  /* ══ BODY ══ */
+  .body { padding: 36px 52px 24px; }
+
+  /* META */
+  .meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 34px; }
+  .meta-block label {
+    display: block; font-family: 'Archivo', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; color: var(--rose-gold); text-transform: uppercase; margin-bottom: 6px;
+  }
+  .meta-block input {
+    width: 100%; border: none; border-bottom: 1.5px solid rgba(201,135,138,0.4);
+    background: transparent; font-family: 'Archivo', sans-serif; font-weight: 400; font-size: 15px;
+    color: var(--text-dark); padding: 5px 0; outline: none; transition: border-color 0.2s;
+  }
+  .meta-block input:focus { border-bottom-color: var(--burgundy-mid); }
+  .meta-block input::placeholder { color: rgba(26,0,8,0.3); }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: 'Archivo', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 2.5px; color: var(--rose-gold); text-transform: uppercase;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 14px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(201,135,138,0.5), transparent); }
+
+  /* ══ ETAPAS ══ */
+  .etapa { margin-bottom: 24px; border: 1px solid rgba(201,135,138,0.22); border-radius: 3px; overflow: hidden; }
+
+  .etapa-header {
+    background: linear-gradient(90deg, rgba(201,135,138,0.13), rgba(201,135,138,0.04));
+    padding: 10px 14px; display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid rgba(201,135,138,0.18);
+  }
+  .etapa-num {
+    font-family: 'Archivo', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; color: var(--rose-gold); text-transform: uppercase; white-space: nowrap;
+  }
+  .etapa-title-input {
+    border: none; background: transparent;
+    font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 700;
+    color: var(--burgundy-mid); outline: none; flex: 1;
+    padding: 2px 6px; border-radius: 2px; transition: background 0.15s;
+  }
+  .etapa-title-input::placeholder { color: rgba(59,0,23,0.3); font-weight: 400; }
+  .etapa-title-input:focus { background: rgba(201,135,138,0.08); }
+  .remove-etapa-btn { background: none; border: none; cursor: pointer; color: rgba(201,135,138,0.35); font-size: 16px; transition: color 0.2s; padding: 0 3px; line-height: 1; }
+  .remove-etapa-btn:hover { color: var(--rose-gold); }
+
+  /* TABLA */
+  .etapa-table { width: 100%; border-collapse: collapse; }
+  .etapa-table thead th {
+    font-family: 'Archivo', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--rose-gold); text-transform: uppercase;
+    padding: 8px 10px; text-align: left;
+    border-bottom: 1px solid rgba(201,135,138,0.2);
+    background: rgba(201,135,138,0.05);
+  }
+  .etapa-table thead th.r { text-align: right; }
+  .etapa-table tbody tr:nth-child(even) td { background: rgba(201,135,138,0.035); }
+  .etapa-table tbody td { padding: 9px 10px; border-bottom: 1px solid rgba(201,135,138,0.1); vertical-align: top; }
+  .etapa-table tbody tr:last-child td { border-bottom: none; }
+
+  .etapa-table td input,
+  .etapa-table td textarea {
+    border: none; background: transparent;
+    font-family: 'Archivo', sans-serif; font-weight: 400; font-size: 13.5px;
+    color: var(--text-dark); outline: none; width: 100%;
+    padding: 2px 3px; border-radius: 2px; transition: background 0.15s; line-height: 1.6;
+  }
+  .etapa-table td input::placeholder,
+  .etapa-table td textarea::placeholder { color: rgba(26,0,8,0.28); }
+  .etapa-table td input:focus,
+  .etapa-table td textarea:focus { background: rgba(201,135,138,0.07); }
+  .etapa-table td textarea { resize: none; overflow: hidden; min-height: 22px; display: block; }
+  .etapa-table td input[type="number"] { text-align: right; }
+
+  /* DIVISA SELECT */
+  .divisa-sel {
+    font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700;
+    border: 1.5px solid rgba(201,135,138,0.35);
+    background: transparent; color: var(--burgundy-mid);
+    padding: 4px 5px; border-radius: 2px; outline: none; cursor: pointer; width: 100%;
+    transition: border-color 0.2s;
+  }
+  .divisa-sel:focus { border-color: var(--rose-gold); }
+  .divisa-sel option { background: #fff; color: var(--text-dark); }
+
+  /* CELDA TOTAL — normal */
+  .monto-cell {
+    text-align: right; font-family: 'Archivo', sans-serif; font-weight: 700;
+    font-size: 13.5px; color: var(--burgundy-mid); white-space: nowrap; padding-top: 10px;
+  }
+  /* cuando es JUS mostramos dos líneas */
+  .monto-cell .jus-total { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+  .monto-cell .jus-label {
+    font-size: 10px; font-weight: 600; color: var(--rose-gold);
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  .monto-cell .jus-ars {
+    font-size: 13.5px; font-weight: 700; color: var(--burgundy-mid);
+  }
+  .monto-cell .jus-equiv {
+    font-size: 11px; font-weight: 400; color: rgba(59,0,23,0.5); font-style: italic;
+  }
+
+  .remove-item-btn { background: none; border: none; cursor: pointer; color: rgba(201,135,138,0.35); font-size: 15px; padding: 5px 2px 0; display: block; transition: color 0.2s; }
+  .remove-item-btn:hover { color: var(--rose-gold); }
+
+  .etapa-footer { padding: 7px 10px 9px; display: flex; justify-content: flex-end; }
+  .add-item-btn {
+    font-family: 'Archivo', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 1px;
+    color: var(--rose-gold); background: none;
+    border: 1px dashed rgba(201,135,138,0.4);
+    padding: 6px 14px; cursor: pointer; border-radius: 2px;
+    transition: all 0.2s; text-transform: uppercase;
+  }
+  .add-item-btn:hover { background: rgba(201,135,138,0.06); border-color: var(--rose-gold); }
+
+  /* AGREGAR ETAPA */
+  .add-etapa-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: none; border: 1px dashed rgba(201,135,138,0.4);
+    color: var(--rose-gold); font-family: 'Archivo', sans-serif;
+    font-size: 12px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 10px 20px; cursor: pointer; transition: all 0.2s;
+    border-radius: 2px; margin-bottom: 28px;
+  }
+  .add-etapa-btn:hover { background: rgba(201,135,138,0.05); border-color: var(--rose-gold); }
+
+  /* FORMA DE PAGO */
+  .pago-section { margin-bottom: 28px; }
+  .pago-area {
+    width: 100%; min-height: 90px;
+    border: 1.5px solid rgba(201,135,138,0.25);
+    background: rgba(201,135,138,0.03);
+    font-family: 'Archivo', sans-serif; font-weight: 400; font-size: 14px;
+    color: var(--text-dark); padding: 13px 15px; outline: none;
+    resize: vertical; line-height: 1.75; border-radius: 2px; transition: border-color 0.2s;
+  }
+  .pago-area::placeholder { color: rgba(26,0,8,0.28); }
+  .pago-area:focus { border-color: var(--rose-gold); }
+
+  /* VIGENCIA */
+  .vigencia-row { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .vigencia-row label {
+    font-family: 'Archivo', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; color: var(--rose-gold); text-transform: uppercase; white-space: nowrap;
+  }
+  .vigencia-row input {
+    border: none; border-bottom: 1.5px solid rgba(201,135,138,0.4); background: transparent;
+    font-family: 'Archivo', sans-serif; font-weight: 400; font-size: 14px;
+    color: var(--text-dark); padding: 4px 0; outline: none; flex: 1;
+  }
+  .vigencia-row input::placeholder { color: rgba(26,0,8,0.28); }
+
+  /* ACLARACIÓN */
+  .aclaracion { border-left: 2.5px solid rgba(201,135,138,0.35); padding-left: 14px; margin-bottom: 28px; }
+  .aclaracion textarea {
+    width: 100%; border: none; background: transparent;
+    font-family: 'Archivo', sans-serif; font-style: italic; font-size: 13px; font-weight: 400;
+    color: rgba(26,0,8,0.48); line-height: 1.7; outline: none; resize: none; overflow: hidden;
+  }
+  .aclaracion textarea::placeholder { color: rgba(26,0,8,0.25); }
+
+  /* ══ FOOTER ══ */
+  .footer {
+    background: linear-gradient(135deg, var(--burgundy-deep) 0%, var(--burgundy-mid) 100%);
+    padding: 30px 52px;
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+  }
+  .footer-col { flex: 1; }
+  .footer-col-title {
+    font-family: 'Archivo', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 2.5px; color: var(--rose-gold); text-transform: uppercase; margin-bottom: 14px;
+  }
+  .contacto-nombre {
+    font-family: 'Archivo', sans-serif; font-style: italic; font-size: 17px; font-weight: 500;
+    color: var(--rose-gold-light); margin-bottom: 8px;
+  }
+  .contacto-dato { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
+  .contacto-dato input {
+    background: transparent; border: none;
+    border-bottom: 1px solid rgba(201,135,138,0.18);
+    color: rgba(232,180,184,0.72); font-family: 'Archivo', sans-serif;
+    font-size: 13px; font-weight: 400; outline: none; width: 210px; padding: 2px 0;
+  }
+  .contacto-dato input::placeholder { color: rgba(232,180,184,0.3); }
+  .contacto-icon { font-size: 12px; color: rgba(201,135,138,0.55); flex-shrink: 0; }
+
+  .footer-sign { text-align: right; padding-bottom: 4px; }
+  .footer-sign-line { width: 140px; height: 1px; background: rgba(201,135,138,0.3); margin: 0 0 8px auto; }
+  .footer-sign-text {
+    font-family: 'Archivo', sans-serif; font-style: italic; font-size: 15px; font-weight: 500;
+    color: rgba(232,180,184,0.7);
+  }
+  .footer-sign-sub {
+    font-family: 'Archivo', sans-serif; font-size: 9px; font-weight: 700;
+    letter-spacing: 2px; color: rgba(232,180,184,0.32); margin-top: 4px; text-transform: uppercase;
+  }
+
+  /* ACTIONS */
+  .actions { display: flex; justify-content: center; gap: 14px; padding: 22px 0; background: var(--cream); }
+  .btn {
+    font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 12px 28px; border: 1.5px solid var(--burgundy-mid);
+    background: transparent; color: var(--burgundy-mid); cursor: pointer; transition: all 0.25s; border-radius: 2px;
+  }
+  .btn:hover { background: var(--burgundy-mid); color: var(--rose-gold-light); }
+  .btn.primary {
+    background: linear-gradient(135deg, var(--burgundy-deep), var(--burgundy-mid));
+    color: var(--rose-gold-light); border-color: transparent;
+  }
+  .btn.primary:hover { opacity: 0.88; }
+
+  /* PRINT */
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    body { background: var(--cream) !important; padding: 0; }
+    .page { margin: 0; box-shadow: none; }
+    .actions, .add-etapa-btn, .add-item-btn, .remove-etapa-btn, .remove-item-btn { display: none !important; }
+    input, textarea, select { pointer-events: none; }
+    .header { background: linear-gradient(135deg, #1a0008 0%, #3b0017 60%, #5c1a2e 100%) !important; }
+    .footer { background: linear-gradient(135deg, #1a0008 0%, #3b0017 100%) !important; }
+    .header-border { background: linear-gradient(90deg, transparent, #c9878a 30%, #e8b4b8 50%, #c9878a 70%, transparent) !important; }
+    .etapa-header { background: linear-gradient(90deg, rgba(201,135,138,0.13), rgba(201,135,138,0.04)) !important; }
+  }
+  @page { margin: 8mm; size: A4; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-grid">
+
+      <!-- LOGO REAL SVG — recoloreado con degradado rosa dorado -->
+      <div class="logo-wrap">
+        <svg viewBox="0 0 1424.72656 900" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f5dde0"/>
+              <stop offset="50%" stop-color="#e8b4b8"/>
+              <stop offset="100%" stop-color="#c9878a"/>
+            </linearGradient>
+          </defs>
+          <g fill="url(#logoGrad)">
+            <path d="M433.9504,561.63635c-3.29145-8.29364-3.53487-20.50903,1.45081-26.35526,23.01609-9.56671,44.64777-3.67797,55.22792-33.96772,2.19304-6.27842,5.60424-11.30562,5.91083-19.00615l1.52175-38.22034.01336-21.00761-.1448-24.39512-.8536-45.08062.1006-51.55772-1.09632-150.13883c-.15016-20.56374-11.93863-35.85495-30.3659-43.07896-11.72055-4.59478-23.73383-5.55096-36.16169-8.84998l-.70229-22.59798c12.25751-4.10409,24.9933-2.53511,37.88873-2.3029l18.69233.3366c7.22035.13002,13.273.18764,20.63159.25773l155.24029,1.47858c21.13578.20131,41.61893,9.218,57.37924,21.97515,46.71377,37.81239,39.25168,98.30798,39.79528,154.25443l.44497,45.79583,1.21709,115.23066c.14803,14.01555-1.41694,45.8175-7.50035,57.91145-6.16255,12.25127-9.67895,25.05664-19.57971,36.73341-24.59005,29.00104-61.56362,51.64493-101.50763,51.80306l-197.60249.78229ZM715.08929,434.71652l-.97175-184.37751-.36152-14.88014c-.43656-17.96867.10811-25.46445.0171-43.14875-.15579-30.27218,4.15449-65.14236-22.98334-73.98793-8.23004-2.68258-15.18774-2.28582-23.0421-1.92079-19.07712.88661-68.21538-4.25721-75.79567,14.14609-3.91539,9.50572-6.78128,20.40625-6.66845,30.85108l.7338,67.93243,1.65601,146.00809c.35722,31.49531-1.22939,55.80558.39542,88.0691.90529,17.97615-3.68183,45.85668,17.42898,55.03678,14.83249,6.44995,28.45017,5.30505,43.10688,2.47168,43.12128-8.33601,66.70396-44.5888,66.48465-86.20013Z"/>
+            <path d="M539.82265,651.61373c27.27966-3.9102,72.61616-1.86997,103.45067-2.34213l26.96644-.41293,16.79593-.5191c17.95561-.55494,33.91951-1.56547,51.54775-4.36968,53.82603-8.56236,98.43593-40.55117,124.56127-88.47186,3.6031-6.60902,7.58804-13.32725,10.47253-20.35411l9.06638-22.08639c28.11322-68.48591,20.73482-199.68048-15.17257-270.34891-4.42577-8.71026-10.83972-18.47132-12.2709-28.10796-.9328-6.2809-1.49456-76.46645,1.13605-83.7647,8.30931-.99213,36.96793,22.34847,41.29547,26.26407,28.18918,25.50579,49.54388,56.41335,66.48215,91.15941,22.81293,46.79694,31.47245,97.7685,31.71858,150.04531.19186,40.75097-8.9034,83.10967-22.99482,121.25342-28.92417,78.2942-91.79451,136.3097-172.4782,158.08364-33.85836,9.13729-67.02406,13.10385-102.14521,14.70269-16.45101.74891-81.28839-.38209-94.49306-.36696-26.95828.03089-52.34028-1.48445-79.18407-2.75366-11.53496-9.16431-.78547-35.31231,15.24558-37.61016Z"/>
+            <path d="M777.71742,400.26556l-.36785-18.55088-.11757-21.00191-.23719-46.79029-.94787-127.62803c-.03834-5.16189-.27254-9.34003-.49135-14.60025l-1.01897-24.49694c-1.46915-35.31983-17.37347-43.84744-29.46715-49.54162-9.89534-4.65912-6.61201-19.49679,4.32514-19.55942l62.51497-.358c15.71585-.09,31.25684-.81281,47.14959-.8316,1.09168-.00129,2.10425-.02741,3.06193-.06022,5.89162-.20182,10.78243,4.56396,10.63056,10.45708-.03162,1.22691-.02056,2.45961.02745,3.68474.19396,4.9496-3.01404,9.38122-7.82823,10.54731-10.61979,2.57232-21.08777,6.5372-26.11393,16.91867-12.8047,26.44794-8.5453,81.56389-8.32211,114.07171l.14505,21.12695.51901,19.77542.75981,192.45195c.10082,25.53742-6.97802,50.37733-16.48708,72.91225-17.46094,41.37957-49.97666,69.33431-92.92329,81.50375-3.90143,1.10552-7.40879,2.5882-11.27488,3.45982-6.72591,1.51637-12.93312-4.13201-12.30416-10.99799v-.00002c.28477-3.1087,1.98118-5.926,4.58832-7.64296,32.12212-21.15433,40.9027-34.11861,59.32564-69.49893.24273-.46614.4522-.94615.6224-1.44338,8.08354-23.61546,17.6088-68.69328,14.55734-92.83636"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="header-text">
+        <div class="firm-name">Estudio Jurídico Integral</div>
+        <div class="doctor-name">Dra. D'Amato</div>
+        <div class="header-divider"></div>
+        <div class="header-sub">Presupuesto Profesional</div>
+      </div>
+
+      <div class="doc-label">
+        <div class="doc-label-title">PRESUPUESTO</div>
+        <div class="doc-label-num">N° <span id="num-display">001</span></div>
+        <input class="doc-num-input" id="doc-num" type="number" value="1" min="1"
+          oninput="document.getElementById('num-display').textContent = String(this.value).padStart(3,'0')">
+      </div>
+    </div>
+  </div>
+  <div class="header-border"></div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- META -->
+    <div class="meta-row">
+      <div>
+        <div class="meta-block">
+          <label>Cliente / Requirente</label>
+          <input type="text" placeholder="Nombre completo o razón social">
+        </div>
+        <div class="meta-block" style="margin-top:16px;">
+          <label>DNI / CUIT</label>
+          <input type="text" placeholder="—">
+        </div>
+        <div class="meta-block" style="margin-top:16px;">
+          <label>Correo electrónico</label>
+          <input type="email" placeholder="—">
+        </div>
+      </div>
+      <div>
+        <div class="meta-block">
+          <label>Fecha de emisión</label>
+          <input type="date" id="fecha-emision">
+        </div>
+        <div class="meta-block" style="margin-top:16px;">
+          <label>Materia / Asunto</label>
+          <input type="text" placeholder="Ej: Sucesión abintestato">
+        </div>
+        <div class="meta-block" style="margin-top:16px;">
+          <label>Expediente / Referencia interna</label>
+          <input type="text" placeholder="—">
+        </div>
+      </div>
+    </div>
+
+    <!-- ETAPAS -->
+    <div class="section-label">Descripción por Etapas</div>
+    <div id="etapas-container"></div>
+    <button class="add-etapa-btn" onclick="addEtapa()">＋ &nbsp;Agregar etapa</button>
+
+    <!-- FORMA DE PAGO -->
+    <div class="section-label">Forma de Pago</div>
+    <div class="pago-section">
+      <textarea class="pago-area" id="forma-pago"
+        placeholder="Ej: Gastos y honorarios de inicio: único pago. Los honorarios finales podrán abonarse: 1) en un pago único al inicio, 2) al momento de la venta del primer bien, 3) en cuotas mensuales consecutivas."
+        oninput="autoResize(this)"></textarea>
+    </div>
+
+    <!-- VIGENCIA -->
+    <div class="vigencia-row">
+      <label>Vigencia</label>
+      <input type="text" placeholder="Ej: El presente presupuesto resultará vigente hasta el 11 de abril del corriente.">
+    </div>
+
+    <!-- ACLARACIÓN -->
+    <div class="aclaracion">
+      <textarea id="aclaracion-txt" rows="2" oninput="autoResize(this)"
+        placeholder="* Se aclara que el valor de los gastos mencionados pueden variar independientemente de la vigencia del presente presupuesto ya que están sujetos a decisiones ajenas."></textarea>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-col">
+      <div class="footer-col-title">Datos de Contacto</div>
+      <div class="contacto-nombre">Dra. D'Amato</div>
+      <div class="contacto-dato">
+        <span class="contacto-icon">✉</span>
+        <input type="email" placeholder="djd.estudiojuridico@gmail.com">
+      </div>
+      <div class="contacto-dato">
+        <span class="contacto-icon">📞</span>
+        <input type="tel" placeholder="1133149081">
+      </div>
+      <div class="contacto-dato" style="margin-top:6px;">
+        <span class="contacto-icon">📍</span>
+        <input type="text" placeholder="Dirección del estudio">
+      </div>
+    </div>
+
+    <div class="footer-sign">
+      <div class="footer-sign-line"></div>
+      <div class="footer-sign-text">Dra. D'Amato</div>
+      <div class="footer-sign-sub">Firma y Sello</div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<div class="actions">
+  <button class="btn" onclick="window.print()">Imprimir / Guardar PDF</button>
+  <button class="btn primary" onclick="resetForm()">Nuevo presupuesto</button>
+</div>
+
+<script>
+  // ── Fecha ──
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('fecha-emision').value = today;
+
+  // ── Divisas ──
+  // JUS: el monto unitario es el valor ARS de conversión.
+  // El total muestra "X JUS = ARS $ total"
+  const DIVISAS = { ARS: 'ARS $', USD: 'USD $', JUS: 'JUS' };
+
+  function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
+  }
+
+  function fmtNum(n) {
+    return n.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  // ── Render celda total ──
+  // Para JUS: qty = cantidad de JUS, precio = valor ARS de cada JUS (conversión)
+  // Muestra: "X JUS = ARS $ total"
+  function renderTotal(cell, divisa, qty, precio) {
+    if (!precio) { cell.innerHTML = '—'; return; }
+    const total = qty * precio;
+
+    if (divisa === 'JUS') {
+      cell.innerHTML = `
+        <div class="jus-total">
+          <span class="jus-label">${fmtNum(qty)} JUS</span>
+          <span class="jus-ars">ARS $ ${fmtNum(total)}</span>
+          <span class="jus-equiv">≈ ARS $ ${fmtNum(precio)} / JUS</span>
+        </div>`;
+    } else {
+      const sym = DIVISAS[divisa];
+      cell.innerHTML = `${sym} ${fmtNum(total)}`;
+    }
+  }
+
+  // ── Etapas ──
+  let etapaId = 0, itemId = 0;
+
+  function addEtapa(titulo = '') {
+    etapaId++;
+    const eid = etapaId;
+    const n = document.querySelectorAll('.etapa').length + 1;
+    const div = document.createElement('div');
+    div.className = 'etapa';
+    div.id = 'etapa-' + eid;
+    div.innerHTML = `
+      <div class="etapa-header">
+        <span class="etapa-num">Etapa ${n}</span>
+        <input class="etapa-title-input" type="text" placeholder="Título de la etapa (Ej: Gasto inicial)" value="${titulo}">
+        <button class="remove-etapa-btn" onclick="removeEtapa(${eid})" title="Eliminar etapa">✕</button>
+      </div>
+      <table class="etapa-table">
+        <thead>
+          <tr>
+            <th style="width:24%">Concepto / Servicio</th>
+            <th style="width:33%">Descripción detallada</th>
+            <th style="width:11%">Divisa</th>
+            <th class="r" style="width:8%">Cant.</th>
+            <th class="r" style="width:13%">Monto unit.</th>
+            <th class="r" style="width:9%">Total</th>
+            <th style="width:2%"></th>
+          </tr>
+        </thead>
+        <tbody id="tbody-${eid}"></tbody>
+      </table>
+      <div class="etapa-footer">
+        <button class="add-item-btn" onclick="addItem(${eid})">＋ Agregar ítem</button>
+      </div>
+    `;
+    document.getElementById('etapas-container').appendChild(div);
+    addItem(eid);
+  }
+
+  function removeEtapa(eid) {
+    const el = document.getElementById('etapa-' + eid);
+    if (el) el.remove();
+    renumberEtapas();
+  }
+
+  function renumberEtapas() {
+    document.querySelectorAll('.etapa').forEach((el, i) => {
+      el.querySelector('.etapa-num').textContent = 'Etapa ' + (i + 1);
+    });
+  }
+
+  function addItem(eid, concepto = '', desc = '', divisa = 'ARS', qty = 1, precio = '') {
+    itemId++;
+    const iid = itemId;
+    const tbody = document.getElementById('tbody-' + eid);
+    if (!tbody) return;
+
+    const tr = document.createElement('tr');
+    tr.id = 'item-' + iid;
+
+    const opts = Object.keys(DIVISAS).map(k =>
+      `<option value="${k}" ${k === divisa ? 'selected' : ''}>${k}</option>`
+    ).join('');
+
+    // Placeholder dinámico según divisa
+    const phMonto = divisa === 'JUS' ? 'Valor ARS / JUS' : '0,00';
+
+    tr.innerHTML = `
+      <td><textarea placeholder="Ej: Apertura de carpeta" rows="1" oninput="autoResize(this)" style="width:100%">${concepto}</textarea></td>
+      <td><textarea placeholder="Incluye gastos por edictos, oficio al colegio de escribanos, bonos ley, etc." rows="2" oninput="autoResize(this)" style="width:100%">${desc}</textarea></td>
+      <td><select class="divisa-sel item-divisa" onchange="onDivisaChange(${iid})">${opts}</select></td>
+      <td><input type="number" class="item-qty" value="${qty}" min="0" step="1" oninput="recalcItem(${iid})" style="width:100%" title="Cantidad de unidades o JUS"></td>
+      <td><input type="number" class="item-precio" value="${precio}" min="0" step="0.01"
+        placeholder="${phMonto}" oninput="recalcItem(${iid})" style="width:100%"
+        title="Para JUS: ingresá el valor ARS de conversión por JUS"></td>
+      <td class="monto-cell item-total" id="itotal-${iid}">—</td>
+      <td><button class="remove-item-btn" onclick="removeItem(${iid})" title="Eliminar">✕</button></td>
+    `;
+    tbody.appendChild(tr);
+    tr.querySelectorAll('textarea').forEach(t => autoResize(t));
+    if (!concepto) tr.querySelector('textarea').focus();
+    recalcItem(iid);
+  }
+
+  function onDivisaChange(iid) {
+    const row = document.getElementById('item-' + iid);
+    if (!row) return;
+    const divisa = row.querySelector('.item-divisa').value;
+    const precioInput = row.querySelector('.item-precio');
+    // Actualizar placeholder según divisa
+    precioInput.placeholder = divisa === 'JUS' ? 'Valor ARS / JUS' : '0,00';
+    precioInput.title = divisa === 'JUS'
+      ? 'Ingresá el valor ARS de conversión por cada JUS'
+      : 'Monto unitario';
+    const qtyLabel = row.querySelector('.item-qty');
+    qtyLabel.title = divisa === 'JUS' ? 'Cantidad de JUS' : 'Cantidad de unidades';
+    recalcItem(iid);
+  }
+
+  function recalcItem(iid) {
+    const row = document.getElementById('item-' + iid);
+    if (!row) return;
+    const divisa = row.querySelector('.item-divisa').value;
+    const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+    const precio = parseFloat(row.querySelector('.item-precio').value) || 0;
+    const cell = document.getElementById('itotal-' + iid);
+    if (cell) renderTotal(cell, divisa, qty, precio);
+  }
+
+  function removeItem(iid) {
+    const el = document.getElementById('item-' + iid);
+    if (el) el.remove();
+  }
+
+  function resetForm() {
+    if (!confirm('¿Limpiar el formulario para un nuevo presupuesto?')) return;
+    document.getElementById('etapas-container').innerHTML = '';
+    etapaId = 0; itemId = 0;
+    document.querySelectorAll('input[type=text], input[type=email], input[type=tel]').forEach(el => el.value = '');
+    document.getElementById('fecha-emision').value = today;
+    document.getElementById('doc-num').value = 1;
+    document.getElementById('num-display').textContent = '001';
+    ['forma-pago', 'aclaracion-txt'].forEach(id => {
+      const el = document.getElementById(id);
+      el.value = ''; autoResize(el);
+    });
+    addEtapa();
+  }
+
+  // Iniciar
+  addEtapa('Gasto inicial');
+</script>
+</body>
+</html>
